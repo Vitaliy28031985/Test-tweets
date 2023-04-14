@@ -3,7 +3,10 @@
    position: relative;
    width: 380px;
    height: 460px;
+   margin-left: 48px;
+   margin-bottom: 48px;
    padding-top: 28px;
+   flex-basis: calc((100% - 96px) / 2);
    background: linear-gradient(114.99deg, #471CA9 -0.99%, #5736A3 54.28%, #4B2A99 78.99%);
 box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
 border-radius: 20px;

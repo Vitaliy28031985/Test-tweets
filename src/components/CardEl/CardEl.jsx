@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import s from "./CardEl.module.css";
 import picture1 from "../../assets/picture1.png";
 import logo from "../../assets/Logo.png";
 
 function CardEl() {
-   const [changeButton, setChangeButton] = useState(false);
+  const [changeButton, setChangeButton] = useState(() => {
+    return JSON.parse(window.localStorage.getItem("changeButton")) ?? true;
+  });
+  
+  useEffect(() => {
+    window.localStorage.setItem("changeButton", JSON.stringify(changeButton));
+  }, [changeButton]);  
+
   return (
     <li className={s.CardContainer}>
       <div className={s.cardLogo}>
