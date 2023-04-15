@@ -3,14 +3,14 @@ import s from "./CardEl.module.css";
 import picture1 from "../../assets/picture1.png";
 import logo from "../../assets/Logo.png";
 
-function CardEl() {
+function CardEl({ tweet }) {
   const [changeButton, setChangeButton] = useState(() => {
     return JSON.parse(window.localStorage.getItem("changeButton")) ?? true;
   });
-  
+
   useEffect(() => {
     window.localStorage.setItem("changeButton", JSON.stringify(changeButton));
-  }, [changeButton]);  
+  }, [changeButton]);
 
   return (
     <li className={s.CardContainer}>
@@ -21,14 +21,11 @@ function CardEl() {
         <img src={picture1} alt="" width="308" />
       </div>
       <div className={s.containerAvatar}>
-        <img
-          className={s.avatar}
-          src="https://w7.pngwing.com/pngs/862/646/png-transparent-beard-hipster-male-man-avatars-xmas-giveaway-icon-thumbnail.png"
-        />
+        <img className={s.avatar} src={tweet.avatar} />
       </div>
       <div className={s.textContainer}>
-        <p className={s.text}>777 tweets</p>
-        <p>100,500 Followers</p>
+        <p className={s.text}>{tweet.tweets} tweets</p>
+        <p>{tweet.followers} Followers</p>
       </div>
       {changeButton ? (
         <button
