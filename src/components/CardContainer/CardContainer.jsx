@@ -5,26 +5,28 @@ import fetchUsers from '../../API/fetchUsers';
 import fetchUpdate from '../../API/fetchUpdate';
 
 import s from "./CardContainer.module.css";
+
 function CardContainer() {
   const [tweets, setTweets] = useState([]);
   const [countPage, setCountPage] = useState(1);
+  const [change, setChange] = useState(true);
 
 useEffect(() => {
   fetchUsers(countPage, setTweets);
-}, [countPage]);
+}, [change, countPage]);
 
    const follow = (id) => {
-  
      const tweetsId = tweets.find((item) => item.id === id);
-  
+
      fetchUpdate(
        {
          ...tweetsId,
          change: true,
-         followers: (tweetsId.followers + 1),
+         followers: tweetsId.followers + 1,
        },
-       tweetsId
-     .id);
+       tweetsId.id
+     );
+     helpers.handleToggle(setChange);
    };
   
     const following = (id) => {
@@ -36,7 +38,8 @@ useEffect(() => {
          change: false,
          followers: (tweetsId.followers - 1),
        }, tweetsId
-     .id);
+         .id);
+      helpers.handleToggle(setChange);
     };
   
   return (
@@ -53,7 +56,7 @@ useEffect(() => {
       </ul>
       <button
         onClick={() => {
-          helpers.counterIncrement(setCountPage);
+          helpers.counterIncrement(setCountPage, countPage);
         }}
         type="button"
         className={s.button}

@@ -1,6 +1,6 @@
 export default function fetchUpdate(tweet, id) {
   fetch(`https://643a57f7bd3623f1b9b151b6.mockapi.io/users/${id}`, {
-    method: "PUT", // or PATCH
+    method: "PUT",
     headers: { "content-type": "application/json" },
     mode: "cors",
     body: JSON.stringify(tweet),
@@ -15,6 +15,6 @@ export default function fetchUpdate(tweet, id) {
       // Do something with updated task
     })
     .catch((error) => {
-      // handle error
+      return Promise.reject(new Error("Nothing was found for your request"));
     });
 }
