@@ -3,14 +3,7 @@ import s from "./CardEl.module.css";
 import picture1 from "../../assets/picture1.png";
 import logo from "../../assets/Logo.png";
 
-function CardEl({ tweet }) {
-  const [changeButton, setChangeButton] = useState(() => {
-    return JSON.parse(window.localStorage.getItem("changeButton")) ?? true;
-  });
-
-  useEffect(() => {
-    window.localStorage.setItem("changeButton", JSON.stringify(changeButton));
-  }, [changeButton]);
+function CardEl({ tweet, follow, following }) {
 
   return (
     <li className={s.CardContainer}>
@@ -27,16 +20,13 @@ function CardEl({ tweet }) {
         <p className={s.text}>{tweet.tweets} tweets</p>
         <p>{tweet.followers} Followers</p>
       </div>
-      {changeButton ? (
-        <button
-          onClick={() => setChangeButton(false)}
-          className={s.buttonFollow}
-        >
+      {!tweet.change ? (
+        <button onClick={() => follow(tweet.id)} className={s.buttonFollow}>
           Follow
         </button>
       ) : (
         <button
-          onClick={() => setChangeButton(true)}
+          onClick={() => following(tweet.id)}
           className={s.buttonFollowing}
         >
           Following
